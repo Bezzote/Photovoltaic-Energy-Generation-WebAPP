@@ -7,7 +7,7 @@ import operator
 # import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+############### Hiding sreamlit menu and footer ############
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
@@ -17,6 +17,7 @@ footer {visibility: hidden;}
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
+############# Image banner ######################
 page_bg_img = '''
 <style>
 body {
@@ -28,7 +29,7 @@ background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAA
 '''
 
 st.markdown(page_bg_img, unsafe_allow_html=True)
-###READ BOOK############
+############## READ BOOK ######################
 
 bk = xw.Book("Photovoltaic module_V10.xlsx")
 
@@ -39,16 +40,7 @@ st.markdown(
 f'<body style="font-size:25px;border: 2px; background-color:skyblue; font-familly: Arial; padding: 10px; "><center>{pv}</center></body>'
 , unsafe_allow_html=True)
 
-
-############# Image banner ######################
-#st.image("download.jpg", width=698)
-
-#set_png_as_page_bg('images.jpg')
-
-
-#st.markdown(f'<body style="background-image: url("https://www.undp.org/sites/g/files/zskgke326/files/blogs/shutterstock-Korea-wind-turbines-1831881703.jpg");background-size: cover;"> </body>', unsafe_allow_html=True)
-
-#### Doing multiple columns ###########################
+#### Making Multiple columns ###########################
 col1, col2 = st.beta_columns(2)
 
 with col1:
@@ -100,7 +92,7 @@ with col1:
                 Equipment_cost = st.number_input("Enter Equipment Cost(Won)", key='Equipment_cost')
                 Analysis_period = st.number_input("Enter Analysis period(Won)", key='Analysis_period')
                 submit_button = st.form_submit_button(label='Submit')
-####################    Other PVs Menu Form    ##################
+####################    Other PVs Menu Forms    ##################
 with col2:
         @st.cache
         def load_data(option):
@@ -149,7 +141,7 @@ with col2:
                         Equipment_cost = st.number_input("Enter Equipment Cost(Won)", key='Equipment_cost')
                         Analysis_period = st.number_input("Enter Analysis period(Won)", key='Analysis_period')
                         submit_button1 = st.form_submit_button(label='Compare PV1 and '+option)
-########################    Other PVs Selection   ######################
+########################  Writing into Other PVs   ######################
                         if submit_button1 and option=="PV2":
                 
                 
@@ -167,7 +159,7 @@ with col2:
                                 input.range('C16:C18').value = [[model_units],[Rsurface],[Total_equipment_cost]]
                                 input.range('L4:L6').value = [[Equipment_cost],[Analysis_period]]
 
-########################    writting inputs into pv1   ################ 
+########################    writting inputs into pv1   ######################### 
 if submit_button:
 
         input = bk.sheets['Input']
@@ -175,22 +167,22 @@ if submit_button:
         input.range('C16:C18').value = [[model_units],[Rsurface],[Total_equipment_cost]]
         input.range('L4:L6').value = [[Equipment_cost],[Analysis_period]]
                 
-################### OUTPUT################################
+######################### Energy Generation OUTPUT     ############################
 st.title("Output")        
 st.subheader("Energy Generation (kWh)")
 input.range("A27:M31").options(pd.DataFrame).value
 
-########################## graph #################
-a, graph = st.beta_columns(2)
 
+#a, graph = st.beta_columns(2)
+######################### Net Profit for 30 years Output ##########################
 #with a:
 st.subheader("Net Profit for 30 years")
 input.range("A37:E40").options(pd.DataFrame).value
-                                
+########################## Energy Generation Graphing  ############################                                
 #with graph:
         
 st.set_option('deprecation.showPyplotGlobalUse', False)
-        #df = pd.DataFrame()
+
 df = input.range("A27:M31").options(pd.DataFrame).value
 
 pv1 = df[0:1][:]
@@ -207,13 +199,11 @@ df_.reset_index(inplace=True)
 cols = np.array(df_[df_['index']=="Facility name"].values)
 data =  np.array(df_[df_['index']!="Facility name"].values)
 p = {'Months':data[0:,0], 'PV1':data[0:,1],'PV2':data[0:,2],'PV3':data[0:,3],'PV4':data[0:,4]}
-        #pvs = pd.DataFrame(p)
+        
 pvs = pd.DataFrame(data=p)
 pvs.set_index('Months', inplace=True)
 pvs.plot.bar(rot=10, title="Energy Generation Graph")
-        #plot.show(block=True)
+        
 st.pyplot()
         
 
-
-#################image bckground #################
