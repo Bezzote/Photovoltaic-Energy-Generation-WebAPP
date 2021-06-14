@@ -210,8 +210,7 @@ p = {'Months':data[0:,0], 'PV1':data[0:,1],'PV2':data[0:,2],'PV3':data[0:,3],'PV
         
 pvs = pd.DataFrame(data=p)
 pvs.set_index('Months', inplace=True)
-pvs.plot.bar(rot=10, title="Energy Generation Graph")
-      
+pvs.plot.bar(rot=10, title="Energy Generation Graph")     
 st.pyplot()
         
 
