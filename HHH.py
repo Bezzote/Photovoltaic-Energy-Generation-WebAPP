@@ -49,6 +49,7 @@ with col1:
         st.markdown(
         f'<div style="font-size:25px;border: 1px; background-color:skyblue; font-familly: Arial; padding: 12px; "><center>{pv}</center></div>'
         , unsafe_allow_html=True)
+
         
 ############### Inputs Form for PV1 ########################        
         with st.form(key='my_form'):
@@ -67,10 +68,11 @@ with col1:
                 Epv.dropna(subset=['Model'], inplace=True) 
                 Epv = Epv[Epv['Model'] != 'Name']
                
-                @st.cache
-                def load_data(Epv):
+                @st.cache()
+                def load_data():
                         time.sleep(2) 
-                        return pd.read_excel(Epv)
+                        Epv = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="PV")
+                        return Epv
                 #st.subheader("""PV Specification Models""")
                 model = st.selectbox("Select PV Model", Epv['Model'].values)
                 #st.subheader("Scale")
@@ -79,10 +81,11 @@ with col1:
                 inverter.dropna(subset=['Name'], inplace=True)
                 inverter = inverter[inverter['Name'] != 'Units']
                 
-                @st.cache
-                def load_data(inverter):
+                @st.cache()
+                def load_data():
                         time.sleep(2) 
-                        return pd.read_excel(inverter)
+                        inverter = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="PV")
+                        return inverter
                         
                 
                 #st.subheader("""Inverter Models""")
@@ -94,13 +97,16 @@ with col1:
                 submit_button = st.form_submit_button(label='Submit')
 ####################    Other PVs Menu Forms    ##################
 with col2:
-        @st.cache
-        def load_data(option):
-                        time.sleep(2) 
-                        return pd.read_excel(option)
+        
         op = ['Select Other PV', 'PV2', 'PV3','PV4']
         option = st.selectbox("",op)      
-        
+        @st.cache()
+        def load_data():
+                time.sleep(2) 
+                #inverter = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="PV")
+                option = st.selectbox("",op)  
+                return option
+                        
         
         if option!=op[0]:    
                 with st.form(key=option):
@@ -118,10 +124,11 @@ with col2:
                         Epv.dropna(subset=['Model'], inplace=True) 
                         Epv = Epv[Epv['Model'] != 'Name']
                         
-                        @st.cache
-                        def load_data(Epv):
+                        @st.cache()
+                        def load_data():
                                 time.sleep(2) 
-                                return pd.read_excel(Epv)
+                                Epv = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="PV")
+                                return Epv
                         #st.subheader("""PV Specification Models""")
                         model = st.selectbox("Select PV Model", Epv['Model'].values)
                         #st.subheader("Scale")
@@ -130,10 +137,11 @@ with col2:
                         inverter.dropna(subset=['Name'], inplace=True)
                         inverter = inverter[inverter['Name'] != 'Units']
                         
-                        @st.cache
-                        def load_data(inverter):
+                        @st.cache()
+                        def load_data():
                                 time.sleep(2) 
-                                return pd.read_excel(inverter)
+                                inverter = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="PV")
+                                return inverter
                         #st.subheader("""Inverter Models""")
                         model_units = st.selectbox("Select Inverter Model", inverter['Name'].values)
                         Rsurface = st.number_input("Enter Non-vertical Surface Solar Attenuation Rate", key='Rsurface')
@@ -143,20 +151,20 @@ with col2:
                         submit_button1 = st.form_submit_button(label='Compare PV1 and '+option)
 ########################  Writing into Other PVs   ######################
                         if submit_button1 and option=="PV2":
-                
-                
-                                input.range('D3:D13').value = [[location],[Envelope_selection],[direction],[Area],[Azimuth],[Slope],[model],[Amodule],[model_units],[Rsurface],[Total_equipment_cost]]
-                                input.range('C16:C18').value = [[model_units],[Rsurface],[Total_equipment_cost]]
+                                input = bk.sheets['Input']
+                                input.range('D3:D10').value = [[location],[Envelope_selection],[direction],[Area],[Azimuth],[Slope],[model],[Amodule]]
+                                input.range('D16:D18').value = [[model_units],[Rsurface],[Total_equipment_cost]]
                                 input.range('L4:L6').value = [[Equipment_cost],[Analysis_period]]
 
                         if submit_button1 and option=="PV3":
-
-                                input.range('E3:E13').value = [[location],[Envelope_selection],[direction],[Area],[Azimuth],[Slope],[model],[Amodule],[model_units],[Rsurface],[Total_equipment_cost]]
-                                input.range('C16:C18').value = [[model_units],[Rsurface],[Total_equipment_cost]]
+                                input = bk.sheets['Input']
+                                input.range('E3:E10').value = [[location],[Envelope_selection],[direction],[Area],[Azimuth],[Slope],[model],[Amodule]]
+                                input.range('E16:E18').value = [[model_units],[Rsurface],[Total_equipment_cost]]
                                 input.range('L4:L6').value = [[Equipment_cost],[Analysis_period]]
                         if submit_button1 and option=="PV4":
-                                input.range('F3:F13').value = [[location],[Envelope_selection],[direction],[Area],[Azimuth],[Slope],[model],[Amodule],[model_units],[Rsurface],[Total_equipment_cost]]
-                                input.range('C16:C18').value = [[model_units],[Rsurface],[Total_equipment_cost]]
+                                input = bk.sheets['Input']
+                                input.range('F3:F10').value = [[location],[Envelope_selection],[direction],[Area],[Azimuth],[Slope],[model],[Amodule]]
+                                input.range('F16:F18').value = [[model_units],[Rsurface],[Total_equipment_cost]]
                                 input.range('L4:L6').value = [[Equipment_cost],[Analysis_period]]
 
 ########################    writting inputs into pv1   ######################### 
@@ -203,7 +211,7 @@ p = {'Months':data[0:,0], 'PV1':data[0:,1],'PV2':data[0:,2],'PV3':data[0:,3],'PV
 pvs = pd.DataFrame(data=p)
 pvs.set_index('Months', inplace=True)
 pvs.plot.bar(rot=10, title="Energy Generation Graph")
-        
+      
 st.pyplot()
         
 
