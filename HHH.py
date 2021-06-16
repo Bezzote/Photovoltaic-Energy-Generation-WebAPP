@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import xlwings as xw
-import base64
-import operator
+#import base64
+#import operator
 # import plotly.express as px
 import matplotlib.pyplot as plt
-import seaborn as sns
+#import seaborn as sns
 ############### Hiding sreamlit menu and footer ############
 hide_streamlit_style = """
 <style>
@@ -179,6 +179,7 @@ if submit_button:
 st.title("Output")        
 st.subheader("Energy Generation (kWh)")
 input.range("A27:M31").options(pd.DataFrame).value
+#input.range('A27:M27').api.Font.Bold = True
 
 
 #a, graph = st.beta_columns(2)
