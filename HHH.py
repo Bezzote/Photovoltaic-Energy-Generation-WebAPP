@@ -179,7 +179,7 @@ if submit_button:
 st.title("Output")        
 st.subheader("Energy Generation (kWh)")
 input.range("A27:M31").options(pd.DataFrame).value
-#input.range('A27:M27').api.Font.Bold = True
+input.range('A27:M27').api.Font.Bold = True
 
 
 #a, graph = st.beta_columns(2)
