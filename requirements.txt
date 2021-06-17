@@ -17,7 +17,7 @@ colorama==0.4.4
 cycler==0.10.0
 decorator==5.0.7
 defusedxml==0.7.1
-Django==3.2.4
+Django==3.2.3
 entrypoints==0.3
 et-xmlfile==1.1.0
 gitdb==4.0.7
@@ -59,10 +59,11 @@ pycparser==2.20
 pydeck==0.6.2
 Pygments==2.9.0
 pyparsing==2.4.7
+pypiwin32==223
 pyrsistent==0.17.3
 python-dateutil==2.8.1
 pytz==2021.1
-pywin32==300
+pypiwin32==223
 pywinpty==0.5.7
 pyzmq==22.0.3
 requests==2.25.1
@@ -80,7 +81,7 @@ toolz==0.11.1
 tornado==6.1
 traitlets==5.0.5
 tzlocal==2.1
-urllib3==1.26.5
+urllib3==1.26.4
 validators==0.18.2
 watchdog==2.1.1
 wcwidth==0.2.5
