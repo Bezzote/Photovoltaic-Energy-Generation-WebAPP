@@ -31,12 +31,16 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 ############## READ BOOK ######################
 
 bk = xw.Book("Photovoltaic module_V10.xlsx")
-
-
 input = bk.sheets['Input']
+
+
+
+
+
+#worksheet.setVisible(True)
 pv = "Photovoltaic Energy Generation"
 st.markdown(
-f'<body style="font-size:25px;border: 5px; background-color:blue; font-familly: Arial; padding: 10px; "><center>{pv}</center></body>'
+f'<body style="font-size:25px;border: 5px; background-color:skyblue; font-familly: Arial; padding: 10px; "><center>{pv}</center></body>'
 , unsafe_allow_html=True)
 
 
@@ -47,7 +51,7 @@ with col1:
         
         pv = "PV1"
         st.markdown(
-        f'<div style="font-size:16px;border: 2px; background-color:default; font-familly: Arial; padding: 12px; "><center>{pv}</center></div>'
+        f'<div style="font-size:16px;border: 2px; background-color:skyblue; font-familly: Arial; padding: 12px; "><center>{pv}</center></div>'
         , unsafe_allow_html=True)
 
         
