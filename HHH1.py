@@ -133,7 +133,7 @@ if options!=None:
                                 Area = st.number_input("Enter Area", input.range('C6').value)
                                 #st.subheader("Azimuth Selection")
                                 Azimuth = st.selectbox("Select Azimuth", options = [0,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300,310,320,330,340,350,360])
-                                Slope = st.number_input("Enter a Slope", key='slope')
+                                Slope = st.number_input("Enter a Slope",input.range('C8').value, key='slope')
                                 Epv = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="PV")
                                 Epv.dropna(subset=['Model'], inplace=True) 
                                 Epv = Epv[Epv['Model'] != 'Name']
@@ -141,16 +141,16 @@ if options!=None:
                                 #st.subheader("""PV Specification Models""")
                                 model = st.selectbox("Select PV Model", Epv['Model'].values)
                                 #st.subheader("Scale")
-                                Amodule = st.number_input("Enter Number of Modules(EA)", key='Amodule')
+                                Amodule = st.number_input("Enter Number of Modules(EA)",input.range('C10').value, key='Amodule')
                                 inverter = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="Inverter")
                                 inverter.dropna(subset=['Name'], inplace=True)
                                 inverter = inverter[inverter['Name'] != 'Units']
                                 #st.subheader("""Inverter Models""")
                                 model_units = st.selectbox("Select Inverter Model", inverter['Name'].values)
-                                Rsurface = st.number_input("Enter Non-vertical Surface Solar Attenuation Rate", key='Rsurface')
-                                Total_equipment_cost = st.number_input("Enter Total Equipment Cost (KRW)", key='Total equipment cost')
-                                Equipment_cost = st.number_input("Enter Equipment Cost(Won)", key='Equipment_cost')
-                                Analysis_period = st.number_input("Enter Analysis period(Won)", key='Analysis_period')
+                                Rsurface = st.number_input("Enter Non-vertical Surface Solar Attenuation Rate",input.range('C17').value, key='Rsurface')
+                                Total_equipment_cost = st.number_input("Enter Total Equipment Cost (KRW)",input.range('C18').value, key='Total equipment cost')
+                                Equipment_cost = st.number_input("Enter Equipment Cost(Won)",input.range('L4').value, key='Equipment_cost')
+                                Analysis_period = st.number_input("Enter Analysis period(Won)",input.range('L6').value, key='Analysis_period')
                                 submit_button1 = st.form_submit_button(label='Compare PV1 and '+option)
                                         
                 ########################  Writing into Other PVs   ######################
@@ -177,10 +177,10 @@ if options!=None:
                                 #st.subheader("Envelope")
                                 Envelope_selection = st.selectbox("Select Envelope", options= ["North","South","East","West"])
                                 direction = st.selectbox("Select Direction",  options=["North", "South", "East", "West"])
-                                Area = st.number_input("Enter Area", min_value= 0, value= 0, step=0)
+                                Area = st.number_input("Enter Area", input.range('C6').value)
                                 #st.subheader("Azimuth Selection")
                                 Azimuth = st.selectbox("Select Azimuth", options = [0,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300,310,320,330,340,350,360])
-                                Slope = st.number_input("Enter a Slope", key='slope')
+                                Slope = st.number_input("Enter a Slope",input.range('C8').value, key='slope')
                                 Epv = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="PV")
                                 Epv.dropna(subset=['Model'], inplace=True) 
                                 Epv = Epv[Epv['Model'] != 'Name']
@@ -188,16 +188,16 @@ if options!=None:
                                 #st.subheader("""PV Specification Models""")
                                 model = st.selectbox("Select PV Model", Epv['Model'].values)
                                 #st.subheader("Scale")
-                                Amodule = st.number_input("Enter Number of Modules(EA)", key='Amodule')
+                                Amodule = st.number_input("Enter Number of Modules(EA)",input.range('C10').value, key='Amodule')
                                 inverter = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="Inverter")
                                 inverter.dropna(subset=['Name'], inplace=True)
                                 inverter = inverter[inverter['Name'] != 'Units']
                                 #st.subheader("""Inverter Models""")
                                 model_units = st.selectbox("Select Inverter Model", inverter['Name'].values)
-                                Rsurface = st.number_input("Enter Non-vertical Surface Solar Attenuation Rate", key='Rsurface')
-                                Total_equipment_cost = st.number_input("Enter Total Equipment Cost (KRW)", key='Total equipment cost')
-                                Equipment_cost = st.number_input("Enter Equipment Cost(Won)", key='Equipment_cost')
-                                Analysis_period = st.number_input("Enter Analysis period(Won)", key='Analysis_period')
+                                Rsurface = st.number_input("Enter Non-vertical Surface Solar Attenuation Rate",input.range('C17').value, key='Rsurface')
+                                Total_equipment_cost = st.number_input("Enter Total Equipment Cost (KRW)",input.range('C18').value, key='Total equipment cost')
+                                Equipment_cost = st.number_input("Enter Equipment Cost(Won)",input.range('L4').value, key='Equipment_cost')
+                                Analysis_period = st.number_input("Enter Analysis period(Won)",input.range('L6').value, key='Analysis_period')
                                 submit_button2 = st.form_submit_button(label='Compare PV1 and '+option)
                                         
                 ########################  Writing into Other PVs   ######################
@@ -228,10 +228,10 @@ if options!=None:
                                 #st.subheader("Envelope")
                                 Envelope_selection = st.selectbox("Select Envelope", options= ["North","South","East","West"])
                                 direction = st.selectbox("Select Direction",  options=["North", "South", "East", "West"])
-                                Area = st.number_input("Enter Area", min_value= 0, value= 0, step=0)
+                                Area = st.number_input("Enter Area", input.range('C6').value)
                                 #st.subheader("Azimuth Selection")
                                 Azimuth = st.selectbox("Select Azimuth", options = [0,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300,310,320,330,340,350,360])
-                                Slope = st.number_input("Enter a Slope", key='slope')
+                                Slope = st.number_input("Enter a Slope",input.range('C8').value, key='slope')
                                 Epv = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="PV")
                                 Epv.dropna(subset=['Model'], inplace=True) 
                                 Epv = Epv[Epv['Model'] != 'Name']
@@ -239,16 +239,16 @@ if options!=None:
                                 #st.subheader("""PV Specification Models""")
                                 model = st.selectbox("Select PV Model", Epv['Model'].values)
                                 #st.subheader("Scale")
-                                Amodule = st.number_input("Enter Number of Modules(EA)", key='Amodule')
+                                Amodule = st.number_input("Enter Number of Modules(EA)",input.range('C10').value, key='Amodule')
                                 inverter = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="Inverter")
                                 inverter.dropna(subset=['Name'], inplace=True)
                                 inverter = inverter[inverter['Name'] != 'Units']
                                 #st.subheader("""Inverter Models""")
                                 model_units = st.selectbox("Select Inverter Model", inverter['Name'].values)
-                                Rsurface = st.number_input("Enter Non-vertical Surface Solar Attenuation Rate", key='Rsurface')
-                                Total_equipment_cost = st.number_input("Enter Total Equipment Cost (KRW)", key='Total equipment cost')
-                                Equipment_cost = st.number_input("Enter Equipment Cost(Won)", key='Equipment_cost')
-                                Analysis_period = st.number_input("Enter Analysis period(Won)", key='Analysis_period')
+                                Rsurface = st.number_input("Enter Non-vertical Surface Solar Attenuation Rate",input.range('C17').value, key='Rsurface')
+                                Total_equipment_cost = st.number_input("Enter Total Equipment Cost (KRW)",input.range('C18').value, key='Total equipment cost')
+                                Equipment_cost = st.number_input("Enter Equipment Cost(Won)",input.range('L4').value, key='Equipment_cost')
+                                Analysis_period = st.number_input("Enter Analysis period(Won)",input.range('L6').value, key='Analysis_period')
                                 submit_button3 = st.form_submit_button(label='Compare PV1 and '+option)
                                         
                 ########################  Writing into Other PVs   ######################
@@ -266,7 +266,7 @@ if options!=None:
 
 ### GET ALL VALUES AFTER 
 df = input.range("A27:M31").options(pd.DataFrame).value
-#df.reset_index(inplace=True)
+df.reset_index(inplace=True)
 
 #global pv1,pv2,pv3,pv4
 pv1 = df[0:1][:]
@@ -300,7 +300,6 @@ if sb == 1:
         pvss = pv1
 elif "PV2" in options and "PV3" not in options and "PV4" not in options and sb1==1:
         st.table(pv1.append(pv2, ignore_index=True).assign(hack='').set_index('hack'))
-        #merge costs
         costs = cost1.merge(cost2,left_index=True, right_index=True)
         pvss = pd.concat([pv1, pv2])
 
@@ -308,35 +307,36 @@ elif "PV2" in options and "PV3" in options  and "PV4" not in options and (sb2==1
         st.table(pv1.append([pv2,pv3], ignore_index=True).assign(hack='').set_index('hack'))
         costs1 = cost1.merge(cost2,left_index=True, right_index=True)
         costs = costs1.merge(cost3,left_index=True, right_index=True)
-
+        pvss = pd.concat([pv1,pv2,pv3])
 elif "PV2" in options and "PV3" in options and  "PV4" in options and (sb3==1 or sb2==1 or sb3==1):
         st.table(pv1.append([pv2,pv3,pv4], ignore_index=True).assign(hack='').set_index('hack'))
         #combine all costs for selectected PVS
         costs1 = cost1.merge(cost2,left_index=True, right_index=True)
         costs2 = costs1.merge(cost3,left_index=True, right_index=True)
         costs = costs2.merge(cost4,left_index=True, right_index=True)
-
+        pvss = pd.concat([pv1,pv2, pv3,pv4])
 elif "PV2" not in options and "PV3" in options and  "PV4" in options and (sb3==1 or sb2==1):
         st.table(pv1.append([pv3,pv4], ignore_index=True).assign(hack='').set_index('hack'))
         #combine all costs for selectected PVS
         costs1 = cost1.merge(cost3,left_index=True, right_index=True)
         costs = costs1.merge(cost4,left_index=True, right_index=True)
-        pvss = pd.concat([pv1, pv3])
+        pvss = pd.concat([pv1,pv3,pv4])
 elif "PV2" not in options and "PV3" not in options and  "PV4" in options and sb3==1:
         st.table(pv1.append(pv4, ignore_index=True).assign(hack='').set_index('hack'))
         #combine all costs for selectected PVS
         costs = cost1.merge(cost4,left_index=True, right_index=True)
-
+        pvss = pd.concat([pv1,pv4])
 elif "PV2" not in options and "PV3" in options and  "PV4" not in options and sb2==1:
         st.table(pv1.append(pv3, ignore_index=True).assign(hack='').set_index('hack'))
         #combine all costs for selectected PVS
         costs = cost1.merge(cost3,left_index=True, right_index=True)
-
+        pvss = pd.concat([pv1,pv3])
 elif "PV2" in options and "PV3" not in options and  "PV4" in options and (sb3==1 or sb1==1):
         st.table(pv1.append([pv2,pv4], ignore_index=True).assign(hack='').set_index('hack'))
         #combine all costs for selectected PVS
         costs1 = cost1.merge(cost2,left_index=True, right_index=True)
         costs = costs1.merge(cost4,left_index=True, right_index=True)
+        pvss = pd.concat([pv1,pv2,pv4])
 else:
         st.table(input.range("A27:M27").options(pd.DataFrame).value)
 
@@ -398,7 +398,7 @@ with grph:
                 st.set_option('deprecation.showPyplotGlobalUse', False)
 
                 df_revised = pvss
-                df_revised.reset_index(inplace=True)
+                #df_revised.reset_index(inplace=True)
                 df_ = df_revised.T
                 df_.reset_index(inplace=True)
                 cols = np.array(df_[df_['index']=="Facility name"].values)
@@ -412,9 +412,8 @@ with grph:
 
         elif "PV2" in options and "PV3" not in options and "PV4" not in options and sb1==1:
                 st.set_option('deprecation.showPyplotGlobalUse', False)
-
                 df_revised = pvss
-                df_revised.reset_index(inplace=True)
+                #df_revised.reset_index(inplace=True)
                 df_ = df_revised.T
                 df_.reset_index(inplace=True)
                 cols = np.array(df_[df_['index']=="Facility name"].values)
@@ -425,4 +424,93 @@ with grph:
                 pvs.set_index('Months', inplace=True)
                 pvs.plot.bar(rot=10, title="Energy Generation Graph",figsize=(15, 3))
                 st.pyplot()
+        elif "PV2" in options and "PV3" in options  and "PV4" not in options and (sb2==1 or sb1==1):        
+                st.set_option('deprecation.showPyplotGlobalUse', False)
+                df_revised = pvss
+                #df_revised.reset_index(inplace=True)
+                df_ = df_revised.T
+                df_.reset_index(inplace=True)
+                cols = np.array(df_[df_['index']=="Facility name"].values)
+                data =  np.array(df_[df_['index']!="Facility name"].values)
+                p = {'Months':data[0:,0], 'PV1':data[0:,1], 'PV2':data[0:,2],'PV3':data[0:,3]}
+
+                pvs = pd.DataFrame(data=p)
+                pvs.set_index('Months', inplace=True)
+                pvs.plot.bar(rot=10, title="Energy Generation Graph",figsize=(15, 3))
+                st.pyplot()
+        elif "PV2" in options and "PV3" in options and  "PV4" in options and (sb3==1 or sb2==1 or sb3==1):        
+                st.set_option('deprecation.showPyplotGlobalUse', False)
                 
+                df_revised = pvss
+                #df_revised.reset_index(inplace=True)
+                df_ = df_revised.T
+                df_.reset_index(inplace=True)
+                cols = np.array(df_[df_['index']=="Facility name"].values)
+                data =  np.array(df_[df_['index']!="Facility name"].values)
+                p = {'Months':data[0:,0], 'PV1':data[0:,1], 'PV2':data[0:,2],'PV3':data[0:,3],'PV4':data[0:,4]}
+
+                pvs = pd.DataFrame(data=p)
+                pvs.set_index('Months', inplace=True)
+                pvs.plot.bar(rot=10, title="Energy Generation Graph",figsize=(15, 3))
+                st.pyplot()
+
+        elif "PV2" not in options and "PV3" in options and  "PV4" in options and (sb3==1 or sb2==1):        
+                st.set_option('deprecation.showPyplotGlobalUse', False)
+                
+                df_revised = pvss
+                #df_revised.reset_index(inplace=True)
+                df_ = df_revised.T
+                df_.reset_index(inplace=True)
+                cols = np.array(df_[df_['index']=="Facility name"].values)
+                data =  np.array(df_[df_['index']!="Facility name"].values)
+                p = {'Months':data[0:,0],'PV1':data[0:,1], 'PV3':data[0:,2],'PV4':data[0:,2]}
+
+                pvs = pd.DataFrame(data=p)
+                pvs.set_index('Months', inplace=True)
+                pvs.plot.bar(rot=10, title="Energy Generation Graph",figsize=(15, 3))
+                st.pyplot()
+
+        elif "PV2" not in options and "PV3" not in options and  "PV4" in options and sb3==1:
+                st.set_option('deprecation.showPyplotGlobalUse', False)
+                
+                df_revised = pvss
+                #df_revised.reset_index(inplace=True)
+                df_ = df_revised.T
+                df_.reset_index(inplace=True)
+                cols = np.array(df_[df_['index']=="Facility name"].values)
+                data =  np.array(df_[df_['index']!="Facility name"].values)
+                p = {'Months':data[0:,0],'PV1':data[0:,1], 'PV4':data[0:,2]}
+
+                pvs = pd.DataFrame(data=p)
+                pvs.set_index('Months', inplace=True)
+                pvs.plot.bar(rot=10, title="Energy Generation Graph",figsize=(15, 3))
+                st.pyplot()
+        elif "PV2" not in options and "PV3" in options and  "PV4" not in options and sb2==1:
+                st.set_option('deprecation.showPyplotGlobalUse', False)
+                
+                df_revised = pvss
+                #df_revised.reset_index(inplace=True)
+                df_ = df_revised.T
+                df_.reset_index(inplace=True)
+                cols = np.array(df_[df_['index']=="Facility name"].values)
+                data =  np.array(df_[df_['index']!="Facility name"].values)
+                p = {'Months':data[0:,0], 'PV1':data[0:,1],'PV3':data[0:,2]}
+
+                pvs = pd.DataFrame(data=p)
+                pvs.set_index('Months', inplace=True)
+                pvs.plot.bar(rot=10, title="Energy Generation Graph",figsize=(15, 3))
+                st.pyplot()
+        elif "PV2" in options and "PV3" not in options and  "PV4" in options and (sb3==1 or sb1==1):
+                st.set_option('deprecation.showPyplotGlobalUse', False)
+                df_revised = pvss
+                #df_revised.reset_index(inplace=True)
+                df_ = df_revised.T
+                df_.reset_index(inplace=True)
+                cols = np.array(df_[df_['index']=="Facility name"].values)
+                data =  np.array(df_[df_['index']!="Facility name"].values)
+                p = {'Months':data[0:,0], 'PV1':data[0:,1], 'PV2':data[0:,2],'PV4':data[0:,3]}
+
+                pvs = pd.DataFrame(data=p)
+                pvs.set_index('Months', inplace=True)
+                pvs.plot.bar(rot=10, title="Energy Generation Graph",figsize=(15, 3))
+                st.pyplot()
