@@ -94,7 +94,7 @@ with col1:
                 submit_button = st.form_submit_button(label='Submit')
                 
 
-########################    writting inputs into pv1   ######################### 
+########################    writing inputs into pv1 Form   ######################### 
                 if submit_button:
                         input = bk.sheets['Input']
                         input.range('C3:C10').value = [[location],[Envelope_selection],[direction],[Area],[Azimuth],[Slope],[model],[Amodule]]
@@ -117,7 +117,7 @@ if options!=None:
         if "PV2" in options:
                 option = "PV2"
                 
-                ####################    Other PVs Menu Forms    ##################
+                ####################   PV2 Menu Form   ##################
                 with col2:
                         st.markdown(
                 f'<div style="font-size:16px;border: 2px; background-color:gray; font-familly: Arial; padding: 12px; "><center><b>{option}</b></center></div>'
@@ -153,7 +153,7 @@ if options!=None:
                                 Analysis_period = st.number_input("Enter Analysis period(Won)",input.range('L6').value, key='Analysis_period')
                                 submit_button1 = st.form_submit_button(label='Compare PV1 and '+option)
                                         
-                ########################  Writing into Other PVs   ######################
+                ########################  Writing Inputs into  PV2 Form   ######################
                                 if submit_button1 and option=="PV2":
                                         input = bk.sheets['Input']
                                         input.range('D3:D10').value = [[location],[Envelope_selection],[direction],[Area],[Azimuth],[Slope],[model],[Amodule]]
@@ -165,7 +165,7 @@ if options!=None:
                                 
         if "PV3" in options:
                 option = "PV3"
-                ####################    Other PVs Menu Forms    ##################
+                ####################   PV3 Menu Form    ##################
                 with col3: 
                         st.markdown(
                 f'<div style="font-size:16px;border: 2px; background-color:gray; font-familly: Arial; padding: 12px; "><center><b>{option}</b></center></div>'
@@ -200,7 +200,7 @@ if options!=None:
                                 Analysis_period = st.number_input("Enter Analysis period(Won)",input.range('L6').value, key='Analysis_period')
                                 submit_button2 = st.form_submit_button(label='Compare PV1 and '+option)
                                         
-                ########################  Writing into Other PVs   ######################
+                ########################  Writing Inputs into PV3 Form   ######################
                                 
                                 if submit_button2 and option=="PV3":
                                         input = bk.sheets['Input']
@@ -216,7 +216,7 @@ if options!=None:
 
         if "PV4" in options:
                 option = "PV4"
-                ####################    Other PVs Menu Forms    ##################
+                ####################    PV4 Menu Form   ##################
                 with col4: 
                         st.markdown(
                 f'<div style="font-size:16px;border: 2px; background-color:gray; font-familly: Arial; padding: 12px; "><center><b>{option}</b></center></div>'
@@ -251,7 +251,7 @@ if options!=None:
                                 Analysis_period = st.number_input("Enter Analysis period(Won)",input.range('L6').value, key='Analysis_period')
                                 submit_button3 = st.form_submit_button(label='Compare PV1 and '+option)
                                         
-                ########################  Writing into Other PVs   ######################
+                ########################  Writing Inputs  into PV4 Form   ######################
 
                                 if submit_button3 and option=="PV4":
                                         input = bk.sheets['Input']
@@ -264,11 +264,11 @@ if options!=None:
 
 
 
-### GET ALL VALUES AFTER 
+### GET ALL VALUES AFTER SUBMISSION #########################
 df = input.range("A27:M31").options(pd.DataFrame).value
 df.reset_index(inplace=True)
 
-#global pv1,pv2,pv3,pv4
+########## global pv1,pv2,pv3,pv4 and Slicing dataframe #########
 pv1 = df[0:1][:]
 pv2 = df[1:2][:]
 pv3 = df[2:3][:]
@@ -341,7 +341,7 @@ else:
         st.table(input.range("A27:M27").options(pd.DataFrame).value)
 
 prof,grph= st.beta_columns((2,3))
-######################### Net Profit for 30  yearsOutput ##########################
+######################### Net Profit for 30  years Output ##########################
 with prof:
         st.subheader("Net Profit for 30 years")
         if sb == 1:
