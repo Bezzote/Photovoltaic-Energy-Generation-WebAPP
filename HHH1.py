@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import xlwings as xw
-
+import time
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -38,13 +38,13 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 ############## READ BOOK ######################
 app = xw.App(visible=False,add_book=False)
 bk = xw.Book("Photovoltaic module_V10.xlsx")
+
 input = bk.sheets['Input']
 
-@st.cache()
-def load_data():
-        time.sleep(2) 
-        Epv = pd.read_excel("Photovoltaic module_V10.xlsx")
-        return Epv
+def run_the_app():
+        @st.cache
+        def load_metadata(bk):
+                return pd.read_excel(bk)        
 
 pv = "Photovoltaic Energy Generation"
 st.markdown(
@@ -73,15 +73,16 @@ with col1:
                 Area = st.number_input("Enter Area", min_value= 0, value= 0, step=0)
                 #st.subheader("Azimuth Selection")
                 Azimuth = st.selectbox("Select Azimuth", options = [0,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300,310,320,330,340,350,360])
-                Slope = st.number_input("Enter a Slope", key='slope')
+                Slope = st.number_input("Enter a Slope",min_value= 0, value= 0, step=0, key='slope')
                 
                 Epv = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="PV")
                 Epv.dropna(subset=['Model'], inplace=True) 
                 Epv = Epv[Epv['Model'] != 'Name']
                 #st.subheader("""PV Specification Models""")
+
                 model = st.selectbox("Select PV Model", Epv['Model'].values)
                 #st.subheader("Scale")
-                Amodule = st.number_input("Enter Number of Modules(EA)", key='Amodule')
+                Amodule = st.number_input("Enter Number of Modules(EA)",min_value= 0, value= 0, step=0, key='Amodule')
                 inverter = pd.read_excel("Photovoltaic module_V10.xlsx", sheet_name="Inverter")
                 inverter.dropna(subset=['Name'], inplace=True)
                 inverter = inverter[inverter['Name'] != 'Units']
@@ -90,7 +91,7 @@ with col1:
                 Rsurface = st.number_input("Enter Non-vertical Surface Solar Attenuation Rate", key='Rsurface')
                 Total_equipment_cost = st.number_input("Enter Total Equipment Cost (KRW)", key='Total equipment cost')
                 Equipment_cost = st.number_input("Enter Equipment Cost(Won)", key='Equipment_cost')
-                Analysis_period = st.number_input("Enter Analysis period(Won)", key='Analysis_period')
+                Analysis_period = st.number_input("Enter Analysis period(Years)", key='Analysis_period')
                 submit_button = st.form_submit_button(label='Submit')
                 
 
@@ -109,9 +110,10 @@ options = st.multiselect('Select other PV', op)
 
 if len(options)==0:
         with col2:
-                st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4JRrtBbUUcZ_A-LSRwZRlFerrHjFVvxE0U-47Kset1deiKz1OWZnhV7Y5jy0xEU86mFE&usqp=CAU", width=1000)
+                st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4JRrtBbUUcZ_A-LSRwZRlFerrHjFVvxE0U-47Kset1deiKz1OWZnhV7Y5jy0xEU86mFE&usqp=CAU", width=1071)
 
-   
+
+
 if options!=None:
         #st.sidebar(col1)
         if "PV2" in options:
@@ -150,7 +152,7 @@ if options!=None:
                                 Rsurface = st.number_input("Enter Non-vertical Surface Solar Attenuation Rate",input.range('C17').value, key='Rsurface')
                                 Total_equipment_cost = st.number_input("Enter Total Equipment Cost (KRW)",input.range('C18').value, key='Total equipment cost')
                                 Equipment_cost = st.number_input("Enter Equipment Cost(Won)",input.range('L4').value, key='Equipment_cost')
-                                Analysis_period = st.number_input("Enter Analysis period(Won)",input.range('L6').value, key='Analysis_period')
+                                Analysis_period = st.number_input("Enter Analysis period(Years)",input.range('L6').value, key='Analysis_period')
                                 submit_button1 = st.form_submit_button(label='Compare PV1 and '+option)
                                         
                 ########################  Writing Inputs into  PV2 Form   ######################
@@ -197,7 +199,7 @@ if options!=None:
                                 Rsurface = st.number_input("Enter Non-vertical Surface Solar Attenuation Rate",input.range('C17').value, key='Rsurface')
                                 Total_equipment_cost = st.number_input("Enter Total Equipment Cost (KRW)",input.range('C18').value, key='Total equipment cost')
                                 Equipment_cost = st.number_input("Enter Equipment Cost(Won)",input.range('L4').value, key='Equipment_cost')
-                                Analysis_period = st.number_input("Enter Analysis period(Won)",input.range('L6').value, key='Analysis_period')
+                                Analysis_period = st.number_input("Enter Analysis period(Years)",input.range('L6').value, key='Analysis_period')
                                 submit_button2 = st.form_submit_button(label='Compare PV1 and '+option)
                                         
                 ########################  Writing Inputs into PV3 Form   ######################
@@ -248,7 +250,7 @@ if options!=None:
                                 Rsurface = st.number_input("Enter Non-vertical Surface Solar Attenuation Rate",input.range('C17').value, key='Rsurface')
                                 Total_equipment_cost = st.number_input("Enter Total Equipment Cost (KRW)",input.range('C18').value, key='Total equipment cost')
                                 Equipment_cost = st.number_input("Enter Equipment Cost(Won)",input.range('L4').value, key='Equipment_cost')
-                                Analysis_period = st.number_input("Enter Analysis period(Won)",input.range('L6').value, key='Analysis_period')
+                                Analysis_period = st.number_input("Enter Analysis period(Years)",input.range('L6').value, key='Analysis_period')
                                 submit_button3 = st.form_submit_button(label='Compare PV1 and '+option)
                                         
                 ########################  Writing Inputs  into PV4 Form   ######################
